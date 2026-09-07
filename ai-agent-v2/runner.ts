@@ -20,7 +20,7 @@ async function main() {
   resetRegistries();
   initMistralClient();
 
-  console.log(`\n🔎 === Phase 1 : Exploration (${targetUrl}) ===\n`);
+  console.log(`\n === Phase 1 : Exploration (${targetUrl}) ===\n`);
   await run(
     explorerAgent,
     `${userGoal}\n\nCommence par naviguer vers ${targetUrl}. Explore de façon hiérarchique : page racine, ` +
@@ -53,7 +53,7 @@ async function main() {
   scenarioRegistry.length = 0;
   scenarioRegistry.push(...orderedScenarios);
 
-  console.log(`\n📋 ${scenarioRegistry.length} scénario(s) découvert(s), ordonnés hiérarchiquement :`);
+  console.log(`\n ${scenarioRegistry.length} scénario(s) découvert(s), ordonnés hiérarchiquement :`);
   scenarioRegistry.forEach((s, i) => console.log(`  ${i + 1}. [N${s.level}] ${s.name} — ${s.goal}`));
 
   const scenarioListText = scenarioRegistry
@@ -65,7 +65,7 @@ async function main() {
     )
     .join('\n\n');
 
-  console.log(`\n🧪 === Phase 2 : Exécution des tests ===\n`);
+  console.log(`\n === Phase 2 : Exécution des tests ===\n`);
   await run(
     testerAgent,
     `Voici les scénarios à exécuter dans l'ordre hiérarchique sur ${targetUrl}. Commence par la page racine et ` +
@@ -85,11 +85,11 @@ async function main() {
     bugs: bugsRegistry,
   });
 
-  console.log(`\n✅ === Rapport final généré : ${reportPath} ===\n`);
+  console.log(`\n === Rapport final généré : ${reportPath} ===\n`);
 }
 
 main().catch(async (error) => {
-  console.error('\n❌ Erreur fatale :', error);
+  console.error('\n Erreur fatale :', error);
   await closeBrowser();
   process.exit(1);
 });
